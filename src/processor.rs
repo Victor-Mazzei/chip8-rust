@@ -1,4 +1,5 @@
 /// this struct represents the processor of chip-8
+
 pub struct Processor {
     //Program counter
     pc: u16,
