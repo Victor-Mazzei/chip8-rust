@@ -1,14 +1,14 @@
 /// this struct is responsible for binding all the chip8 functionalities 
 
 use memory:Memory;
-use processor:Processor;
+use cpu:Cpu;
 
 mod memory;
 mod processor;
 
 pub struct Chip8 {
     memory: Memory,
-    processor: Processor
+    cpu: Cpu
 }
 
 impl Chip8 {

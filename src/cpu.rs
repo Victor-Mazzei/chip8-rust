@@ -1,6 +1,6 @@
-/// this struct represents the processor of chip-8
+/// this struct represents the CPU of chip-8
 
-pub struct Processor {
+pub struct Cpu {
     //Program counter
     pc: u16,
     //General purpose register
@@ -12,7 +12,7 @@ pub struct Processor {
 
 }
 
-impl Processor {
+impl Cpu {
     fn new () -> self {
         self {
 
