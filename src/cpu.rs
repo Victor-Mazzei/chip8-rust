@@ -1,21 +1,31 @@
 /// this struct represents the CPU of chip-8
-
+#[derive(Debug)]
 pub struct Cpu {
     //Program counter
-    pc: u16,
+    pub pc: usize,
     //General purpose register
-    v: [u8;16]
+    pub v: [u8;16],
+    //I register
+    pub i: usize,
+    //Stack pointer,
+    pub sp: usize,
     //Delay timer
-    delay_timer: u8,
+    pub delay_timer: u8,
     //Sound timer
-    sound_timer: u8,
+    pub sound_timer: u8,
 
 }
 
 impl Cpu {
-    fn new () -> self {
-        self {
-
+    pub fn new () -> Self {
+        //initializing all the registers with 0
+        Self {
+            pc: 0,
+            v:[0; 16],
+            i:0,
+            sp:0,
+            delay_timer:0,
+            sound_timer:0
         }
     }
 }
