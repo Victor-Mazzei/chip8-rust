@@ -5,7 +5,10 @@ use sdl2::render::Canvas;
 use sdl2::video::Window;
 use sdl2::pixels;
 
-use constants::{DISPLAY_WIDTH, DISPLAY_HEIGHT, DISPLAY_SCALE};
+
+const DISPLAY_WIDTH: usize = 64;
+const DISPLAY_HEIGHT: usize = 32;
+const DISPLAY_SCALE: usize = 10
 
 
 /// this struct represents the Display output of the chip-8
