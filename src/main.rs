@@ -1,26 +1,56 @@
+extern crate sdl2;
+use sdl2::pixels::Color;
+use sdl2::event::Event;
+use sdl2::keyboard::Keycode;
+
 use chip8::Chip8;
 use cpu::Cpu;
 use memory::Memory;
+
+use std::{thread, time};
 
 mod chip8;
 mod cpu;
 mod memory;
 
+
 fn main() {
     //
-    let mut chip8 = Chip8::new(Cpu::new(),Memory::new());
+    //let mut chip8 = Chip8::new(Cpu::new(),Memory::new());
 
-    println!("{} SP BEFORE PUSH", chip8.cpu.sp);
+    let sdl_context = sdl2::init().unwrap();
+    let video_subsystem = sdl_context.video().unwrap();
 
-    //println!("{:?}, CHIP 8 MEMORY", chip8.memory);
+    let window = video_subsystem.window("rust-sdl2 demo", 800, 600)
+        .position_centered()
+        .build()
+        .unwrap();
 
-    chip8.memory.stack_push(&mut chip8.cpu, 0xf1);
+    let mut canvas = window.into_canvas().build().unwrap();
 
-    println!("{:?}", chip8.memory.stack);
+    canvas.set_draw_color(Color::RGB(0, 255, 255));
+    canvas.clear();
+    canvas.present();
+    let mut event_pump = sdl_context.event_pump().unwrap();
+    let mut i = 0;
+    'running: loop {
+        i = (i + 1) % 255;
+        canvas.set_draw_color(Color::RGB(i, 64, 255 - i));
+        canvas.clear();
+        for event in event_pump.poll_iter() {
+            match event {
+                Event::Quit {..} |
+                Event::KeyDown { keycode: Some(Keycode::Escape), .. } => {
+                    break 'running
+                },
+                _ => {}
+            }
+        }
+        // The rest of the game loop goes here...
 
-    println!("{} SP AFTER PUSH", chip8.cpu.sp);
-
-    //println!("{} value push on stack", chip8.memory.stack[chip8.cpu.sp - 1]);
+        canvas.present();
+        thread::sleep(time::Duration::from_millis(100));
+    }
 
     
 

@@ -4,7 +4,7 @@ use super::{cpu::Cpu, memory::Memory};
 #[derive(Debug)]
 pub struct Chip8 {
     pub memory: Memory,
-    pub cpu: Cpu
+    pub cpu: Cpu,
 }
 
 impl Chip8 {
@@ -12,7 +12,7 @@ impl Chip8 {
 
         Self {
             cpu,
-            memory
+            memory,
         }
     } 
 

@@ -1,3 +1,5 @@
+use std::{thread, time};
+
 /// this struct represents the CPU of chip-8
 #[derive(Debug)]
 pub struct Cpu {
@@ -17,7 +19,7 @@ pub struct Cpu {
 }
 
 impl Cpu {
-    pub fn new () -> Self {
+    pub fn new() -> Self {
         //initializing all the registers with 0
         Self {
             pc: 0,
@@ -28,4 +30,23 @@ impl Cpu {
             sound_timer:0
         }
     }
+
+    pub fn check_delay_timer(&mut self) {
+        
+        if self.delay_timer > 0 {
+            thread::sleep(time::Duration::from_millis(100));
+            self.delay_timer -=1;
+            println!("DELAY _TIMER");
+        }
+    }
+
+    pub fn check_sound_timer(&mut self) {
+        
+        if self.sound_timer > 0 {
+           
+            println!("BEEP!!!!!");
+            self.sound_timer -=1;
+        }
+    }
+
 }
