@@ -8,11 +8,11 @@ pub struct Chip8 {
 }
 
 impl Chip8 {
-    pub fn new (memory: Memory, cpu: Cpu) -> Self {
+    pub fn new (cpu: Cpu, memory: Memory) -> Self {
 
         Self {
-            memory: memory,
-            cpu: cpu
+            cpu,
+            memory
         }
     } 
 

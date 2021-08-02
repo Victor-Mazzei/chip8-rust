@@ -8,7 +8,7 @@ mod memory;
 
 fn main() {
     //
-    let mut chip8 = Chip8::new(Memory::new(), Cpu::new());
+    let mut chip8 = Chip8::new(Cpu::new(),Memory::new());
 
     println!("{} SP BEFORE PUSH", chip8.cpu.sp);
 
