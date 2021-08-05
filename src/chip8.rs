@@ -1,6 +1,6 @@
 /// this struct is responsible for binding all the chip8 functionalities 
 
-use super::{cpu::Cpu, memory::Memory, keyboard::Keyboard};
+use super::{cpu::Cpu, memory::Memory, keyboard::Keyboard, display::Display};
 
 static DEFAULT_FONTSET: [u8; 80] = [
     0xF0, 0x90, 0x90, 0x90, 0xF0, 
@@ -26,20 +26,22 @@ pub struct Chip8 {
     pub memory: Memory,
     pub cpu: Cpu,
     pub keyboard: Keyboard,
+    pub display: Display
 }
 
 impl Chip8 {
-    pub fn new(cpu: Cpu, memory: Memory, keyboard: Keyboard) -> Self {
+    pub fn new(cpu: Cpu, memory: Memory, keyboard: Keyboard, display: Display) -> Self {
         Self {
             cpu,
             memory,
-            keyboard
+            keyboard,
+            display
         }
     } 
 
     pub fn initialize(&mut self) {
 
-        for i in range(0,80)
+        for i in 0..80
         {   
             //initilize default fontset on address 0x000 to 0x1FF
             self.memory.ram[i] = DEFAULT_FONTSET[i];

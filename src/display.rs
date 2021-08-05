@@ -1,13 +1,9 @@
-
-static DISPLAY_WIDTH = 64;
-static DISPLAY_HEIGHT = 32;
-static DISPLAY_SCALE = 10;
-
+use super::constants::{DISPLAY_WIDTH, DISPLAY_HEIGHT};
 
 // this struct represents the Display output of the chip-8
 #[derive(Debug)]
 pub struct Display {
-    pub pixel: [[bool; DISPLAY_WIDTH]; DISPLAY_HEIGHT]
+    pub pixel: [[bool; DISPLAY_WIDTH as usize]; DISPLAY_HEIGHT as usize]
 }
 
 impl Display {
@@ -19,15 +15,15 @@ impl Display {
     pub fn new() -> Self {
 
         Self {
-            pixel: [[false;DISPLAY_WIDTH];DISPLAY_HEIGHT]
+            pixel: [[false;DISPLAY_WIDTH as usize];DISPLAY_HEIGHT as usize]
         }
     }
 
-    fn screen_set(&mut self, x:u8, y:u8) {
+    fn screen_set(&mut self, x:usize, y:usize) {
         self.pixel[y][x] = true
     }
 
-    fn screen_is_set(&self, x:u8,y:u8) -> bool {
+    fn screen_is_set(&self, x:usize,y:usize) -> bool {
         self.pixel[y][x]
     }
    
