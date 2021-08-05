@@ -29,13 +29,21 @@ pub struct Chip8 {
 }
 
 impl Chip8 {
-    pub fn new (cpu: Cpu, memory: Memory, keyboard: Keyboard) -> Self {
-
+    pub fn new(cpu: Cpu, memory: Memory, keyboard: Keyboard) -> Self {
         Self {
             cpu,
             memory,
             keyboard
         }
     } 
+
+    pub fn initialize(&mut self) {
+
+        for i in range(0,80)
+        {   
+            //initilize default fontset on address 0x000 to 0x1FF
+            self.memory.ram[i] = default_fontset[i];
+        }
+    }
 
 }
