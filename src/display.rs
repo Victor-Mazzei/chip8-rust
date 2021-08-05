@@ -7,7 +7,6 @@ static DISPLAY_SCALE = 10;
 // this struct represents the Display output of the chip-8
 #[derive(Debug)]
 pub struct Display {
-
     pub pixel: [[bool; DISPLAY_WIDTH]; DISPLAY_HEIGHT]
 }
 
