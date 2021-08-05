@@ -40,7 +40,7 @@ impl Display {
                 if (c & (0b10000000 >> lx)) == 0 {
                     continue;
                 }
-                self.pixel[ly as usize + y][lx as usize + x] = true;  
+                self.pixel[(ly as usize + y) % DISPLAY_HEIGHT as usize][(lx as usize + x) & DISPLAY_WIDTH as usize] ^= true;  
             }
         } 
 
