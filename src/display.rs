@@ -1,11 +1,4 @@
 
-use sdl2;
-use sdl2::rect::Rect;
-use sdl2::render::Canvas;
-use sdl2::video::Window;
-use sdl2::pixels;
-
-
 static DISPLAY_WIDTH = 64;
 static DISPLAY_HEIGHT = 32;
 static DISPLAY_SCALE = 10;
@@ -14,7 +7,8 @@ static DISPLAY_SCALE = 10;
 // this struct represents the Display output of the chip-8
 #[derive(Debug)]
 pub struct Display {
-    pub canvas: Canvas<Window>,
+
+    pub pixel: [[bool; DISPLAY_WIDTH]; DISPLAY_HEIGHT]
 }
 
 impl Display {
@@ -23,47 +17,20 @@ impl Display {
     // - getting the sdl2 context
     // - creating the window
     // - @return canvas;
-    pub fn new(sdl_context: &sdl2::Sdl) -> Self {
+    pub fn new() -> Self {
 
-        let video_subsystem = sdl_context.video().unwrap();
-
-        let window = video_subsystem.window("CHIP8 RUST EMULATOR", DISPLAY_WIDTH * DISPLAY_SCALE, DISPLAY_HEIGHT * DISPLAY_SCALE)
-        .position_centered()
-        .build()
-        .unwrap();
-
-        let mut canvas = window.into_canvas()
-        .build()
-        .unwrap();
-
-        canvas.set_draw_color(pixels::Color::RGB(0,0,0));
-        canvas.clear();
-        canvas.present();
-
-        return Self {
-            canvas: canvas
+        Self {
+            pixel: [[false;DISPLAY_WIDTH];DISPLAY_HEIGHT]
         }
     }
-    
-    // this function is responsible for drawing pixels to display
-    pub fn draw(&mut self, pixels: &[[u8; DISPLAY_WIDTH]; DISPLAY_HEIGHT]) {
 
-        for (y, row) in pixels.iter().enumerate() {
-            for (x, &column) in row.iter().enumerate() {
-                let x = (x as i32) * DISPLAY_SCALE;
-                let y = (y as i32) * DISPLAY_SCALE;
-
-                if column == 0 {
-                    pixels::Color::RGB(0,0,0);
-                } else {
-                    pixels::Color::RGB(0,250,0);
-                }
-
-                self.canvas.set_draw_color(column);
-                let _ = self.canvas
-                    .fill_rect(Rect::new(x , y, DISPLAY_SCALE, DISPLAY_SCALE));
-            }
-        }
-        self.canvas.present();
+    fn screen_set(&mut self, x:u8, y:u8) {
+        self.pixel[y][x] = true
     }
+
+    fn screen_is_set(&self, x:u8,y:u8) -> bool {
+        self.pixel[y][x]
+    }
+   
+
 }

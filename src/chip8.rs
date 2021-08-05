@@ -2,7 +2,7 @@
 
 use super::{cpu::Cpu, memory::Memory, keyboard::Keyboard};
 
-static default_fontset: [u8; 80] = [
+static DEFAULT_FONTSET: [u8; 80] = [
     0xF0, 0x90, 0x90, 0x90, 0xF0, 
     0x20, 0x60, 0x20, 0x20, 0x70,
     0xF0, 0x10, 0xF0, 0x80, 0xF0, 
@@ -42,7 +42,7 @@ impl Chip8 {
         for i in range(0,80)
         {   
             //initilize default fontset on address 0x000 to 0x1FF
-            self.memory.ram[i] = default_fontset[i];
+            self.memory.ram[i] = DEFAULT_FONTSET[i];
         }
     }
 
