@@ -1,10 +1,8 @@
 /// This struct represents the memory of chip-8
-//use constants::{CHIP8_RAM_SIZE,CHIP8_STACK_DEPTH};
-//use crate::Chip8;
+
 use crate::Cpu;
 
-const CHIP8_RAM_SIZE: usize = 4096;
-const CHIP8_STACK_DEPTH: usize = 16;
+use super::constants::{CHIP8_RAM_SIZE, CHIP8_STACK_DEPTH};
 
 #[derive(Debug)]
 pub struct Memory {
