@@ -39,7 +39,7 @@ fn main() {
             DISPLAY_HEIGHT as u32 * DISPLAY_SCALE,
         )
         .position_centered()
-        .opengl()
+        //.opengl()
         .build()
         .unwrap();
 
@@ -51,10 +51,7 @@ fn main() {
     let mut event_pump = sdl_context.event_pump().unwrap();
 
     'running: loop {
-        // i = (i + 1) % 255;
-        // canvas.set_draw_color(Color::RGB(i, 64, 255 - i));
-        // canvas.clear();
-        for event in event_pump.poll_iter() {
+       for event in event_pump.poll_iter() {
             match event {
                 Event::Quit { .. }
                 | Event::KeyDown {
@@ -64,7 +61,6 @@ fn main() {
                 _ => {}
             }
         }
-        // Todo fix bug width..
         for x in 0..DISPLAY_WIDTH {
             for y in 0..DISPLAY_HEIGHT {
                 if chip8.display.screen_is_set(x, y) {
@@ -83,7 +79,6 @@ fn main() {
         canvas.present();
         // The rest of the game loop goes here...
 
-        // canvas.present();
         thread::sleep(time::Duration::from_millis(100));
     }
 }
